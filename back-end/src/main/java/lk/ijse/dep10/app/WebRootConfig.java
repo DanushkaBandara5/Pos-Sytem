@@ -15,7 +15,7 @@ public class WebRootConfig {
         bds.setUsername("root");
         bds.setPassword("root");
         bds.setDriverClassName("com.mysql.cj.jdbc.Driver");
-        bds.setUrl("jdbc:mysql://localhost:3306/dep10_pos_app?createDatabaseIfNotExist=ture");
+        bds.setUrl("jdbc:mysql://localhost:3306/dep10_pos_app?createDatabaseIfNotExist=true");
         bds.setMaxTotal(20);
         bds.setInitialSize(10);
         return bds;
