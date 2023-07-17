@@ -12,6 +12,6 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Builder
 public class OrderDetailPK  implements Serializable {
-    private int orderID;
+    private int orderId;
     private String itemCode;
 }
