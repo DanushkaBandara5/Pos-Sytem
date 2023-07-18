@@ -1,6 +1,7 @@
 package lk.ijse.dep10.app.dao;
 
 import lk.ijse.dep10.app.dao.custom.OrderCustomerDAO;
+import lk.ijse.dep10.app.dao.custom.OrderDetailDAO;
 import lk.ijse.dep10.app.dao.custom.impl.*;
 
 public class DAOFactory {
@@ -22,7 +23,7 @@ public class DAOFactory {
             case ORDER_CUSTOMER:
                 return (T)new OrderCustomerDAOImpl();
             case ORDER_DETAIL:
-                return (T)new OrderCustomerDAOImpl();
+                return (T)new OrderDetailDAOImpl();
             case QUERY:
                 return (T) new QueryDAOImpl();
             default:

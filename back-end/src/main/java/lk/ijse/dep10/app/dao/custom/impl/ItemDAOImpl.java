@@ -30,7 +30,7 @@ public class ItemDAOImpl implements ItemDAO {
 
     @Override
     public void update(Item item) throws Exception {
-        jdbcTemplate.update("INSERT INTO item (code, description, qty, unit_price) VALUES (?, ?, ?, ?)", item.getCode(), item.getDescription(), item.getQty(), item.getUnitPrice());
+        jdbcTemplate.update("update item set description=?, qty=?, unit_price=? where code=?", item.getDescription(), item.getQty(), item.getUnitPrice(), item.getCode());
 
     }
 

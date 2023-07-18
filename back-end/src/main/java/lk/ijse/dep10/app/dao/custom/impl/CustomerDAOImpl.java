@@ -80,7 +80,9 @@ public class CustomerDAOImpl implements CustomerDAO {
 
     @Override
     public List<Customer> findCustomers(String query) throws Exception {
-        return null;
+        query = "%" + query + "%";
+        return jdbcTemplate.query("SELECT * FROM customer WHERE id LIKE ? OR name LIKE ? OR address LIKE ? OR contact LIKE ?", CUSTOMER_ROW_MAPPER,
+                query, query, query, query);
     }
 
     @Override
