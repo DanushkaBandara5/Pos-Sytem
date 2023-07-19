@@ -5,12 +5,14 @@ import lk.ijse.dep10.app.business.BOType;
 import lk.ijse.dep10.app.business.custom.OrderBO;
 import lk.ijse.dep10.app.dto.OrderDTO;
 import lk.ijse.dep10.app.dto.OrderDTO2;
+import lk.ijse.dep10.app.dto.util.ValidationGroup;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 @CrossOrigin
 @RequestMapping("/api/v1/orders")
@@ -21,7 +23,7 @@ public class OrderController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public Integer saveOrder(@RequestBody  OrderDTO order) throws Exception {
+    public Integer saveOrder(@RequestBody @Valid OrderDTO order) throws Exception {
         OrderBO orderBO = BOFactory.getInstance().getBO(BOType.ORDER, pool);
         return orderBO.placeOrder(order);
     }
