@@ -1,37 +1,39 @@
-const btnNew = $('#btn-new-customer');
-const btnSave = $("#btn-save");
-const txtName = $("#txt-name");
-const txtContact = $("#txt-contact");
-const txtAddress = $("#txt-address");
-const tbodyElm = $("#tbl-customers tbody");
-const searchElm = $("#txt-search");
-let id;
+const btnNew = $('#btn-new-item');
+const btnSaveItem = $("#btn-save-item");
+const txtCode = $("#txt-code");
+const txtDescription = $("#txt-description");
+const txtQuantity = $("#txt-quantity");
+const txtPrice =$("#txt-price")
+const tbodyItem = $("#tbl-item tbody");
+const searchItemElm = $("#txt-search");
+const btnClose =$(".btn-close")
+
 loadData();
 
-$("#newCustomer input ").addClass("animate__animated");
+$("#newItem input").addClass("animate__animated");
 btnNew.on('click', () => {
     clear()
-    $("#newCustomer input ").next().hide();
+    $("#newCustomer input").next().hide();
 });
-$('#newCustomer input').on('input', (eventData) => {
+$('#newItem input').on('input', (eventData) => {
     $(eventData.target).removeClass('invalid');
     $(eventData.target).next().hide();
 });
 
-searchElm.on('input', () => {
+searchItemElm.on('input', () => {
     loadData();
 });
-btnSave.on('click', () => {
-    if (!validate()) return;
-    let name = txtName.val().trim();
-    let address = txtAddress.val().trim();
-    let contact = txtContact.val().trim();
-    let customer = {
-        name, contact, address
+btnSaveItem.on('click', () => {
+    console.log("hello")
+    if (!validateItem()) return;
+    let code = txtCode.val().trim();
+    let description = txtDescription.val().trim();
+    let qty = txtQuantity.val().trim();
+    let unitPrice = txtPrice.val().trim();
+    let item = {
+        code, description, qty,unitPrice
     };
-    console.log(btnSave.text())
-    if (btnSave.text() === 'Save Customer') {
-
+    if (btnSaveItem.text() === 'Save Item') {
 
         const xhr = new XMLHttpRequest();
         xhr.addEventListener('readystatechange', () => {
@@ -39,7 +41,6 @@ btnSave.on('click', () => {
                 if (xhr.status == 201) {
                     clear()
                     //TODO show success message
-                    customers = JSON.parse(xhr.responseText);
                     loadData();
 
                 } else {
@@ -50,59 +51,64 @@ btnSave.on('click', () => {
             }
         })
 
-        xhr.open('POST', `Http://localhost:8080/pos/api/v1/customers`);
+        xhr.open('POST', `http://localhost:8080/pos/api/v1/items`);
         xhr.setRequestHeader('Content-Type', 'application/json');
-        console.log(customer)
-        xhr.send(JSON.stringify(customer));
+        xhr.send(JSON.stringify(item));
     } else {
-        customer.id = id;
         const xhr = new XMLHttpRequest();
         xhr.addEventListener('readystatechange', () => {
             if (xhr.readyState == 4) {
                 if (xhr.status == 204) {
                     loadData()
-                    clear('Save Customer')
+                    clear('Save Item')
                     //TODO show  success messgae
                 } else {
-                    clear("Save Customers")
+                    clear("Save Item")
                     //TODO show  fail message
                 }
             }
         });
-        xhr.open('PATCH', `http://localhost:8080/pos/api/v1/customers/${id}`);
+        xhr.open('PATCH', `http://localhost:8080/pos/api/v1/items/${code}`);
         xhr.setRequestHeader('Content-Type', 'application/json');
-        xhr.send(JSON.stringify(customer))
+        xhr.send(JSON.stringify(item))
     }
 
 
 });
 
 
-function validate() {
+function validateItem() {
     $("#newCustomer input ").removeClass("animate__shakeX invalid");
-
-
     let validate = true;
-    if (!txtAddress.val().trim()) {
+    if (!txtPrice.val().trim()) {
 
-        validate = validateMessage(txtAddress, "Address can't be empty");
-    } else if (!/^.{5,}$/.test(txtAddress.val().trim())) {
+        validate = validateMessage(txtPrice, "Unit Price can't be empty");
 
-        validate = validateMessage(txtAddress, "Address is invalid");
+    } else if (!/^\d+.\d*$/.test(txtPrice.val().trim())) {
+
+        validate = validateMessage(txtPrice, "Unit Price is invalid");
     }
-    if (!txtContact.val().trim()) {
+    if (!txtQuantity.val().trim()) {
 
-        validate = validateMessage(txtContact, "Contact can't be empty");
-    } else if (!/^0\d{2}-\d{7}$/.test(txtContact.val().trim())) {
+        validate = validateMessage(txtQuantity, "Quantity can't be empty");
 
-        validate = validateMessage(txtContact, "Contact is invalid");
+    } else if (!/^\d+$/.test(txtQuantity.val().trim())) {
+
+        validate = validateMessage(txtQuantity, "Quantity is invalid");
     }
-    if (!txtName.val().trim()) {
+    if (!txtDescription.val().trim()) {
 
-        validate = validateMessage(txtName, "Name can't be empty");
-    } else if (!/^[A-z ]{3,}$/.test(txtName.val().trim())) {
+        validate = validateMessage(txtDescription, "Description can't be empty");
+    } else if (!/^[A-z ]{3,}$/.test(txtDescription.val().trim())) {
 
-        validate = validateMessage(txtName, "Name is invalid");
+        validate = validateMessage(txtDescription, "Name is invalid");
+    }
+    if (!txtCode.val().trim()) {
+
+        validate = validateMessage(txtCode, "Code can't be empty");
+    } else if (!/^.+$/.test(txtCode.val().trim())) {
+
+        validate = validateMessage(txtCode, "Code is invalid");
     }
     return validate;
 
@@ -118,21 +124,22 @@ function validateMessage(txtElm, message) {
 }
 
 function loadData() {
-    let ajax = $.ajax(`http://127.0.0.1:8080/pos/api/v1/customers?q=${searchElm.val().trim()}`, 'GET');
-    ajax.done((custList) => {
-        tbodyElm.empty();
+    let ajax = $.ajax(`http://127.0.0.1:8080/pos/api/v1/items?q=${searchItemElm.val().trim()}`, 'GET');
+    ajax.done((itemList) => {
+        tbodyItem.empty();
 
-        if (custList.length === 0) {
+        if (itemList.length === 0) {
             tbodyElm.parent().find('tfoot').show();
             return;
         }
-        tbodyElm.parent().find('tfoot').hide();
-        custList.forEach(customers => {
+        tbodyItem.parent().find('tfoot').hide();
+        itemList.forEach(item => {
+            console.log(item)
             let trElm = $("<tr></tr>");
-            const elm = `<td class="text-center">${formatID(customers.id)}</td>
-                <td>${customers.name}</td>
-                <td class="d-none d-xl-table-cell ">${customers.address}</td>
-                <td class="contact text-center">${customers.contact}</td>
+            const elm = `<td class="text-center">${item.code}</td>
+                <td>${item.description}</td>
+                <td class="d-none d-xl-table-cell ">${item.qty}</td>
+                <td class="contact text-center">${item.unitPrice}</td>
                 <td>
                     <div class="actions d-flex gap-3 justify-content-center">
                         <svg data-bs-toggle="tooltip" data-bs-title="Edit Customer" xmlns="http://www.w3.org/2000/svg"
@@ -154,7 +161,7 @@ function loadData() {
                     </div>
                 </td>`;
             trElm.append(elm);
-            tbodyElm.append(trElm);
+            tbodyItem.append(trElm);
 
 
         });
@@ -168,11 +175,11 @@ function loadData() {
     });
 };
 
-tbodyElm.on('click', 'svg:last-child()', (data) => {
+tbodyItem.on('click', 'svg:last-child()', (data) => {
 
-    let id = $(data.target).parents('tr').find("td:first-child").text();
+    let code = $(data.target).parents('tr').find("td:first-child").text();
 
-    const ajax = $.ajax(`http://127.0.0.1:8080/pos/api/v1/customers/${id}`, {
+    const ajax = $.ajax(`http://127.0.0.1:8080/pos/api/v1/items/${code}`, {
         method: 'DELETE',
         crossDomain: true
 
@@ -181,43 +188,32 @@ tbodyElm.on('click', 'svg:last-child()', (data) => {
         loadData();
     });
     ajax.fail(() => {
-
+    alert("fail to delete")
     })
 });
 
-tbodyElm.on('click', 'svg:first-child()', (data) => {
+tbodyItem.on('click', 'svg:first-child()', (data) => {
 
-    id = +$(data.target).parents('tr').find("td:first-child").text().substring(1);
-    let name = $(data.target).parents('tr').find("td:nth-child(2)").text();
-    let address = $(data.target).parents('tr').find("td:nth-child(3)").text();
-    let contact = $(data.target).parents('tr').find("td:nth-child(4)").text();
-    console.log(id, name, address, contact);
+    code = $(data.target).parents('tr').find("td:first-child").text();
+    let description = $(data.target).parents('tr').find("td:nth-child(2)").text();
+    let quantity = $(data.target).parents('tr').find("td:nth-child(3)").text();
+    let unitPrice = $(data.target).parents('tr').find("td:nth-child(4)").text();
     btnNew.trigger("click");
-    txtName.val(name)
-    txtAddress.val(address)
-    txtContact.val(contact);
-    btnSave.text('Update Customer');
+    txtCode.val(code)
+    txtDescription.val(description)
+    txtQuantity.val(quantity);
+    txtPrice.val(unitPrice);
+    btnSaveItem.text('Update Item');
 });
 
 function clear(text) {
-    $("#newCustomer input ").val('');
+    $("#newItem input ").val('');
     if (text) {
-        btnSave.text(text);
+        btnSaveItem.text(text);
     }
+    btnClose.trigger('click')
 }
 
-function formatID(value) {
-    if(value<10){
-        return "C00"+value;
-
-    }else if (value<100){
-        return "C0"+value;
-    }
-    else if(value<1000){
-        return "C"+value;
-    }
-
-}
 
 
 

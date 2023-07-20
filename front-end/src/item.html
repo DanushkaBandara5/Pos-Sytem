@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../node_modules/animate.css/animate.min.css">
+  <link rel="stylesheet" href="sass/styles.scss">
+  <link rel="stylesheet" href="sass/item.scss">
+  <script defer src="../node_modules/jquery/dist/jquery.min.js"></script>
+  <script type="module" defer src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script type="module" defer src="js/item.js"></script>
+  <title>Manage Items</title>
+</head>
+<body>
+<div id="navigation-bar" class="d-flex flex-column flex-shrink-0 p-3 bg-body-tertiary" style="width: 280px;">
+  <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none d-flex align-items-center">
+    <!--    <svg class="bi pe-none me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>-->
+    <svg xmlns="http://www.w3.org/2000/svg" class="bi pe-none" width="40" height="32" viewBox="0 0 16 16">
+      <path fill-rule="evenodd" d="M10.5 3.5a2.5 2.5 0 0 0-5 0V4h5v-.5zm1 0V4H15v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V4h3.5v-.5a3.5 3.5 0 1 1 7 0zm-.646 5.354a.5.5 0 0 0-.708-.708L7.5 10.793 6.354 9.646a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z"></path>
+    </svg>
+    <span class="fs-4 d-flex align-items-center">POS System</span>
+  </a>
+  <hr>
+  <ul class="nav nav-pills flex-column mb-auto">
+    <li class="nav-item">
+      <a href="home.html" class="  nav-link link-body-emphasis d-flex align-items-center d-flex align-items-center" aria-current="page">
+        <!--        <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#home"></use></svg>-->
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house" viewBox="0 0 16 16">
+          <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5ZM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5 5 5Z"/>
+        </svg>
+        <span>Home</span>
+      </a>
+    </li>
+    <li>
+      <a href="customer.html" class=" nav-link link-body-emphasis d-flex align-items-center">
+        <!--        <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>-->
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-bounding-box" viewBox="0 0 16 16">
+          <path d="M1.5 1a.5.5 0 0 0-.5.5v3a.5.5 0 0 1-1 0v-3A1.5 1.5 0 0 1 1.5 0h3a.5.5 0 0 1 0 1h-3zM11 .5a.5.5 0 0 1 .5-.5h3A1.5 1.5 0 0 1 16 1.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 1-.5-.5zM.5 11a.5.5 0 0 1 .5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 1 0 1h-3A1.5 1.5 0 0 1 0 14.5v-3a.5.5 0 0 1 .5-.5zm15 0a.5.5 0 0 1 .5.5v3a1.5 1.5 0 0 1-1.5 1.5h-3a.5.5 0 0 1 0-1h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 1 .5-.5z"/>
+          <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm8-9a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+        </svg>
+        <span>Manage Customers</span>
+
+
+      </a>
+    </li>
+    <li>
+      <a href="#" class=" active nav-link link-body-emphasis d-flex align-items-center">
+        <!--        <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#table"></use></svg>-->
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard2-data" viewBox="0 0 16 16">
+          <path d="M9.5 0a.5.5 0 0 1 .5.5.5.5 0 0 0 .5.5.5.5 0 0 1 .5.5V2a.5.5 0 0 1-.5.5h-5A.5.5 0 0 1 5 2v-.5a.5.5 0 0 1 .5-.5.5.5 0 0 0 .5-.5.5.5 0 0 1 .5-.5h3Z"/>
+          <path d="M3 2.5a.5.5 0 0 1 .5-.5H4a.5.5 0 0 0 0-1h-.5A1.5 1.5 0 0 0 2 2.5v12A1.5 1.5 0 0 0 3.5 16h9a1.5 1.5 0 0 0 1.5-1.5v-12A1.5 1.5 0 0 0 12.5 1H12a.5.5 0 0 0 0 1h.5a.5.5 0 0 1 .5.5v12a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5v-12Z"/>
+          <path d="M10 7a1 1 0 1 1 2 0v5a1 1 0 1 1-2 0V7Zm-6 4a1 1 0 1 1 2 0v1a1 1 0 1 1-2 0v-1Zm4-3a1 1 0 0 0-1 1v3a1 1 0 1 0 2 0V9a1 1 0 0 0-1-1Z"/>
+        </svg>
+        <span>Manage Items</span>
+      </a>
+    </li>
+    <li>
+      <a href="#" class=" nav-link link-body-emphasis d-flex align-items-center">
+        <!--        <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#grid"></use></svg>-->
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart4" viewBox="0 0 16 16">
+          <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l.5 2H5V5H3.14zM6 5v2h2V5H6zm3 0v2h2V5H9zm3 0v2h1.36l.5-2H12zm1.11 3H12v2h.61l.5-2zM11 8H9v2h2V8zM8 8H6v2h2V8zM5 8H3.89l.5 2H5V8zm0 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"/>
+        </svg>
+        <span>Place Order</span>
+      </a>
+    </li>
+    <li>
+      <a href="#" class="nav-link link-body-emphasis d-flex align-items-center">
+        <!--        <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#people-circle"></use></svg>-->
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+          <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+        </svg>
+        <span>Search Orders</span>
+      </a>
+    </li>
+  </ul>
+  <hr>
+
+</div>
+</nav>
+<main>
+  <section class="d-flex justify-content-between border-bottom p-2">
+    <h2 class="m-0 align-self-center">Manage Items</h2>
+    <button id="btn-new-item" class="btn btn-primary" data-bs-toggle="modal"
+            data-bs-target="#newItem">New Item</button>
+  </section>
+  <section class="p-2">
+    <input id="txt-search" class="form-control text-center" type="text" placeholder="Search Item">
+  </section>
+  <section class="p-2">
+    <table id="tbl-item" class="table table-hover table-bordered">
+      <thead class="table-light">
+      <tr>
+        <th class="text-center">Code</th>
+        <th>Description</th>
+        <th class="d-none d-xl-table-cell">Quantity</th>
+        <th class="contact text-center">Unit Price</th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td class="text-center">I001</td>
+        <td>Monitor</td>
+        <td class="d-none d-xl-table-cell">12</td>
+        <td class="contact text-center">12.75</td>
+        <td>
+          <div class="actions d-flex gap-3 justify-content-center">
+            <svg id="edit" data-bs-toggle="tooltip" data-bs-title="Edit Customer" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                 class="bi bi-pencil-square" viewBox="0 0 16 16">
+              <path
+                      d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+              <path fill-rule="evenodd"
+                    d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+            </svg>
+            <svg id="delete" data-bs-toggle="tooltip" data-bs-title="Delete Customer" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                 class="bi bi-trash" viewBox="0 0 16 16">
+              <path
+                      d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z" />
+              <path
+                      d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z" />
+            </svg>
+          </div>
+        </td>
+      </tr>
+      </tbody>
+      <tfoot>
+      <tr>
+        <td class="text-center" colspan="5">No Item records are found!</td>
+      </tr>
+      </tfoot>
+    </table>
+  </section>
+</main>
+<!-- Modal -->
+<div class="modal fade" id="newItem" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+     aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5">Add New Item</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-center">
+        <div class="mb-3">
+          <label for="txt-code" class="form-label">Item Code</label>
+          <input type="text" class="form-control text-center" id="txt-code" placeholder="Eg.I001">
+          <div class="invalid-feedback">
+            Item Code can't be empty
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="txt-description" class="form-label">Description</label>
+          <input type="text" class="form-control text-center" id="txt-description" placeholder="Eg. Monitor">
+          <div class="invalid-feedback">
+            Description can't be empty
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="txt-quantity" class="form-label">Quantity</label>
+          <input type="text" class="form-control text-center" id="txt-quantity" placeholder="Eg. 077-1234567">
+          <div class="invalid-feedback">
+            Quantity can't be empty
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="txt-price" class="form-label">Unit Price</label>
+          <input type="text" class="form-control text-center" id="txt-price" placeholder="2000.00">
+          <div class="invalid-feedback">
+            Unit Price can't be empty
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer d-flex justify-content-between">
+        <div id="loader">
+          <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+        </div>
+        <button id="btn-save-item" type="button" class="btn btn-primary">Save Item</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
