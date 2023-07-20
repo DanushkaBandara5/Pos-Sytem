@@ -5,3 +5,10 @@ body{
 main{
   flex-grow: 10;
 }
+
+.actions svg:last-child:hover{
+  fill: red;
+}
+.actions svg:first-child:hover{
+  fill: green;
+}

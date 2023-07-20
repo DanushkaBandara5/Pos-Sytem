@@ -1,6 +1,4 @@
 
-
-
 const btnNew =$('#btn-new-customer');
 const btnSave =$("#btn-save");
 const txtName =$("#txt-name");
@@ -8,10 +6,12 @@ const txtContact=$("#txt-contact");
 const txtAddress =$("#txt-address");
 const tbodyElm =$("#tbl-customers tbody");
 const searchElm =$("#txt-search");
+let id;
 loadData();
 
 $("#newCustomer input ").addClass("animate__animated");
 btnNew.on('click',()=>{
+    clear()
     $("#newCustomer input ").next().hide();
 });
 $('#newCustomer input').on('input',(eventData)=>{
@@ -27,28 +27,58 @@ btnSave.on('click',()=>{
     let name =txtName.val().trim();
     let address =txtAddress.val().trim();
     let contact=txtContact.val().trim();
-
     let customer={
         name,contact,address
     };
+    console.log(btnSave.text())
+    if(btnSave.text()==='Save Customer'){
 
-    const xhr = new XMLHttpRequest();
-    xhr.addEventListener('readystatechange',()=>{
-        if(xhr.readyState==4){
-            if(xhr.status==201){
-                customer=JSON.parse(xhr.responseText);
-                loadData();
-                $("#newCustomer input ").val('');
-            }
-            else{
-                const errorObj =JSON.parse(xhr.responseText);
-            }
-        }
-    })
 
-xhr.open("POST",`Http://localhost:8080/pos/api/v1/customers`);
-xhr.setRequestHeader('Content-Type','application/json');
-xhr.send(JSON.stringify(customer));
+        const xhr = new XMLHttpRequest();
+        xhr.addEventListener('readystatechange',()=>{
+            if(xhr.readyState==4){
+                if(xhr.status==201){
+                    clear()
+                    //TODO show success message
+                    customers=JSON.parse(xhr.responseText);
+                    loadData();
+
+                }
+                else{
+                    const errorObj =JSON.parse(xhr.responseText);
+                    clear();
+                    //TODO show Failure message
+                }
+            }
+        })
+
+        xhr.open('POST',`Http://localhost:8080/pos/api/v1/customers`);
+        xhr.setRequestHeader('Content-Type','application/json');
+        console.log(customer)
+        xhr.send(JSON.stringify(customer));
+    }
+    else{
+        customer.id=id;
+        const xhr =new XMLHttpRequest();
+        xhr.addEventListener('readystatechange',()=>{
+            if(xhr.readyState==4){
+                if(xhr.status==204){
+                    loadData()
+                    clear('Save Customer')
+                    //TODO show  success messgae
+                }
+                else{
+                    clear("Save Customers")
+                    //TODO show  fail message
+                }
+            }
+        });
+        xhr.open('PATCH',`http://localhost:8080/pos/api/v1/customers/${id}`);
+        xhr.setRequestHeader('Content-Type','application/json');
+        xhr.send(JSON.stringify(customer))
+    }
+
+
 });
 
 
@@ -148,7 +178,44 @@ function loadData() {
     });
 };
 
-tbodyElm
+tbodyElm.on('click','svg:last-child()',(data)=>{
+
+    let id=$(data.target).parents('tr').find("td:first-child").text();
+
+    const ajax=$.ajax(`http://127.0.0.1:8080/pos/api/v1/customers/${id}`,{
+        method:'DELETE',
+        crossDomain:true
+
+    });
+    ajax.done(()=>{
+        loadData();
+    });
+    ajax.fail(()=>{
+
+    })
+});
+
+tbodyElm.on('click','svg:first-child()',(data)=>{
+
+    id=$(data.target).parents('tr').find("td:first-child").text();
+    let name=$(data.target).parents('tr').find("td:nth-child(2)").text();
+    let address =$(data.target).parents('tr').find("td:nth-child(3)").text();
+    let contact=$(data.target).parents('tr').find("td:nth-child(4)").text();
+    console.log(id,name,address,contact);
+    btnNew.trigger("click");
+    txtName.val(name)
+    txtAddress.val(address)
+    txtContact.val(contact);
+    btnSave.text('Update Customer');
+});
+function clear(text){
+    $("#newCustomer input ").val('');
+    if(text){
+        btnSave.text(text);
+    }
+}
+
+
 
 
 
