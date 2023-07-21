@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../node_modules/animate.css/animate.min.css">
+    <link rel="stylesheet" href="sass/styles.scss">
+    <link rel="stylesheet" href="sass/order.scss">
+    <script defer src="../node_modules/jquery/dist/jquery.min.js"></script>
+    <script type="module" defer src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script type="module" defer src="js/order.js"></script>
+    <title>Palace Orders</title>
+</head>
+<body>
+<div id="navigation-bar" class="d-flex flex-column flex-shrink-0 p-3 bg-body-tertiary" style="width: 280px;">
+    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none d-flex align-items-center">
+        <!--    <svg class="bi pe-none me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>-->
+        <svg xmlns="http://www.w3.org/2000/svg" class="bi pe-none" width="40" height="32" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M10.5 3.5a2.5 2.5 0 0 0-5 0V4h5v-.5zm1 0V4H15v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V4h3.5v-.5a3.5 3.5 0 1 1 7 0zm-.646 5.354a.5.5 0 0 0-.708-.708L7.5 10.793 6.354 9.646a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z"></path>
+        </svg>
+        <span class="fs-4 d-flex align-items-center">POS System</span>
+    </a>
+    <hr>
+    <ul class="nav nav-pills flex-column mb-auto">
+        <li class="nav-item">
+            <a href="home.html" class=" nav-link link-body-emphasis d-flex align-items-center d-flex align-items-center" aria-current="page">
+                <!--        <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#home"></use></svg>-->
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house" viewBox="0 0 16 16">
+                    <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5ZM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5 5 5Z"/>
+                </svg>
+                <span>Home</span>
+            </a>
+        </li>
+        <li>
+            <a href="customer.html" class=" nav-link link-body-emphasis d-flex align-items-center">
+                <!--        <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>-->
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-bounding-box" viewBox="0 0 16 16">
+                    <path d="M1.5 1a.5.5 0 0 0-.5.5v3a.5.5 0 0 1-1 0v-3A1.5 1.5 0 0 1 1.5 0h3a.5.5 0 0 1 0 1h-3zM11 .5a.5.5 0 0 1 .5-.5h3A1.5 1.5 0 0 1 16 1.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 1-.5-.5zM.5 11a.5.5 0 0 1 .5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 1 0 1h-3A1.5 1.5 0 0 1 0 14.5v-3a.5.5 0 0 1 .5-.5zm15 0a.5.5 0 0 1 .5.5v3a1.5 1.5 0 0 1-1.5 1.5h-3a.5.5 0 0 1 0-1h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 1 .5-.5z"/>
+                    <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm8-9a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                </svg>
+                <span>Manage Customers</span>
+
+
+            </a>
+        </li>
+        <li>
+            <a href="item.html" class="nav-link link-body-emphasis d-flex align-items-center">
+                <!--        <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#table"></use></svg>-->
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard2-data" viewBox="0 0 16 16">
+                    <path d="M9.5 0a.5.5 0 0 1 .5.5.5.5 0 0 0 .5.5.5.5 0 0 1 .5.5V2a.5.5 0 0 1-.5.5h-5A.5.5 0 0 1 5 2v-.5a.5.5 0 0 1 .5-.5.5.5 0 0 0 .5-.5.5.5 0 0 1 .5-.5h3Z"/>
+                    <path d="M3 2.5a.5.5 0 0 1 .5-.5H4a.5.5 0 0 0 0-1h-.5A1.5 1.5 0 0 0 2 2.5v12A1.5 1.5 0 0 0 3.5 16h9a1.5 1.5 0 0 0 1.5-1.5v-12A1.5 1.5 0 0 0 12.5 1H12a.5.5 0 0 0 0 1h.5a.5.5 0 0 1 .5.5v12a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5v-12Z"/>
+                    <path d="M10 7a1 1 0 1 1 2 0v5a1 1 0 1 1-2 0V7Zm-6 4a1 1 0 1 1 2 0v1a1 1 0 1 1-2 0v-1Zm4-3a1 1 0 0 0-1 1v3a1 1 0 1 0 2 0V9a1 1 0 0 0-1-1Z"/>
+                </svg>
+                <span>Manage Items</span>
+            </a>
+        </li>
+        <li>
+            <a href="#" class=" active  nav-link link-body-emphasis d-flex align-items-center">
+                <!--        <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#grid"></use></svg>-->
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart4" viewBox="0 0 16 16">
+                    <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l.5 2H5V5H3.14zM6 5v2h2V5H6zm3 0v2h2V5H9zm3 0v2h1.36l.5-2H12zm1.11 3H12v2h.61l.5-2zM11 8H9v2h2V8zM8 8H6v2h2V8zM5 8H3.89l.5 2H5V8zm0 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"/>
+                </svg>
+                <span>Place Order</span>
+            </a>
+        </li>
+        <li>
+            <a href="#" class=" nav-link link-body-emphasis d-flex align-items-center">
+                <!--        <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#people-circle"></use></svg>-->
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                </svg>
+                <span>Search Orders</span>
+            </a>
+        </li>
+    </ul>
+    <hr>
+
+</div>
+<main class="row gx-0">
+    <section class="col-12 col-lg-5">
+        <section class="p-2">
+            <div class="p-2 fw-bold">Select Customer</div>
+            <div class="form-floating">
+                <input type="text" class="form-control" id="txt-customer"
+                       placeholder="Customer ID / Contact Number">
+                <label for="txt-customer">Customer ID / Contact Number</label>
+            </div>
+            <div class="d-flex p-2 justify-content-between">
+                <span id="customer-name">Walk-in Customer</span>
+                <svg data-bs-toggle="tooltip" data-bs-title="Clear Customer" id="btn-clear-customer"
+                     xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                     class="bi bi-trash"
+                     viewBox="0 0 16 16">
+                    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z"/>
+                    <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z"/>
+                </svg>
+            </div>
+        </section>
+        <div class="border-top"></div>
+        <section class="p-2">
+            <div class="fw-bold p-2">Select Item</div>
+            <div class="form-floating">
+                <input type="text" class="form-control" id="txt-code"
+                       placeholder="Item Code">
+                <label for="txt-code">Item Code</label>
+            </div>
+            <div id="item-info" class="rounded border mt-2 bg-info-subtle d-none">
+                <div class="p-2 text-center">
+                    <div class="fw-bold">Description</div>
+                    <div id="description">Logitech Keyboard</div>
+                </div>
+                <div class="p-2 text-center">
+                    <div class="fw-bold">Unit Price</div>
+                    <div id="unit-price">LKR 1250.00</div>
+                </div>
+                <div class="p-2 text-center">
+                    <div class="fw-bold">Stock Status</div>
+                    <div id="stock"><span></span></div>
+                </div>
+            </div>
+            <form id="frm-order" class="d-flex mt-2 gap-2 d-none">
+                <div class="form-floating flex-grow-1">
+                    <input type="number" class="form-control" id="txt-qty"
+                           placeholder="Enter Qty." value="1">
+                    <label for="txt-qty">Enter Qty.</label>
+                </div>
+                <button class="btn btn-primary">+ Add to Cart</button>
+            </form>
+        </section>
+    </section>
+    <section class="col-12 col-lg-7 p-2">
+        <div class="fw-bold p-2 d-flex justify-content-between">
+            <span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                     class="bi bi-cart-check" viewBox="0 0 16 16">
+                      <path d="M11.354 6.354a.5.5 0 0 0-.708-.708L8 8.293 6.854 7.146a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z"/>
+                      <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zm3.915 10L3.102 4h10.796l-1.313 7h-8.17zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                    </svg>
+                Cart Details
+            </span>
+            <span id="order-date-time">2023-05-29 13:17</span>
+        </div>
+        <div id="tbl-order-wrapper" class="border">
+            <table id="tbl-order" class="table table-bordered table-hover my-0">
+                <thead class="border table-light">
+                <tr>
+                    <th>Item</th>
+                    <th>Qty.</th>
+                    <th>Price</th>
+                    <th>Total</th>
+                </tr>
+                </thead>
+                <tbody>
+                </tbody>
+                <tfoot>
+                <tr>
+                    <td colspan="4" class="text-center">
+                        No Items have been placed in the cart yet !
+                    </td>
+                </tr>
+                </tfoot>
+            </table>
+        </div>
+        <div class="fs-4 justify-content-between d-flex mt-1 p-2">
+            <span>Net Total</span>
+            <span id="net-total" class="fw-bold">LKR 0.00</span>
+        </div>
+        <div class="d-flex justify-content-end">
+            <button id="btn-place-order" class=" btn fw-bold btn-outline-primary fs-5 d-flex align-items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-basket2"
+                     viewBox="0 0 16 16">
+                    <path d="M4 10a1 1 0 0 1 2 0v2a1 1 0 0 1-2 0v-2zm3 0a1 1 0 0 1 2 0v2a1 1 0 0 1-2 0v-2zm3 0a1 1 0 1 1 2 0v2a1 1 0 0 1-2 0v-2z"/>
+                    <path d="M5.757 1.071a.5.5 0 0 1 .172.686L3.383 6h9.234L10.07 1.757a.5.5 0 1 1 .858-.514L13.783 6H15.5a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-.623l-1.844 6.456a.75.75 0 0 1-.722.544H3.69a.75.75 0 0 1-.722-.544L1.123 8H.5a.5.5 0 0 1-.5-.5v-1A.5.5 0 0 1 .5 6h1.717L5.07 1.243a.5.5 0 0 1 .686-.172zM2.163 8l1.714 6h8.246l1.714-6H2.163z"/>
+                </svg>
+                Place Order
+            </button>
+        </div>
+    </section>
+</main>
+<div id="toast" class="toast-container position-fixed bottom-0 start-50 translate-middle-x p-3">
+    <div id="liveToast" class="toast" data-bs-autohide="true" data-bs-delay="1000" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+            <strong class="me-auto"></strong>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

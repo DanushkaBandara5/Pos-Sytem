@@ -1,0 +1,15 @@
+body{
+  display: flex !important;
+  flex-direction: row;
+}
+main{
+  flex-grow: 10;
+}
+#tbl-order tr td:first-child svg:hover{
+  fill: red;
+  
+  
+}
+#btn-clear-customer:hover{
+  fill:red;
+}
