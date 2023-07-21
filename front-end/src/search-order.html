@@ -2,18 +2,17 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <title>Title</title>
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../node_modules/animate.css/animate.min.css">
     <link rel="stylesheet" href="sass/styles.scss">
-    <link rel="stylesheet" href="sass/customer.scss">
+    <link rel="stylesheet" href="sass/search-order.scss">
     <script defer src="../node_modules/jquery/dist/jquery.min.js"></script>
-    <script type="module" defer src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script type="module" defer src="js/customer.js"></script>
-    <title>Manage Customers</title>
+    <script defer src="./js/search-order.js"></script>
 
 </head>
+
 <body>
-<nav id="navigation-bar" class="d-flex flex-column flex-shrink-0 p-3 bg-body-tertiary" style="width: 280px;">
+<div id="navigation-bar" class="d-flex flex-column flex-shrink-0 p-3 bg-body-tertiary" style="width: 280px;">
     <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none d-flex align-items-center">
         <!--    <svg class="bi pe-none me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>-->
         <svg xmlns="http://www.w3.org/2000/svg" class="bi pe-none" width="40" height="32" viewBox="0 0 16 16">
@@ -33,7 +32,7 @@
             </a>
         </li>
         <li>
-            <a href="customer.html" class=" active nav-link link-body-emphasis d-flex align-items-center">
+            <a href="customer.html" class=" nav-link link-body-emphasis d-flex align-items-center">
                 <!--        <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>-->
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-bounding-box" viewBox="0 0 16 16">
                     <path d="M1.5 1a.5.5 0 0 0-.5.5v3a.5.5 0 0 1-1 0v-3A1.5 1.5 0 0 1 1.5 0h3a.5.5 0 0 1 0 1h-3zM11 .5a.5.5 0 0 1 .5-.5h3A1.5 1.5 0 0 1 16 1.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 1-.5-.5zM.5 11a.5.5 0 0 1 .5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 1 0 1h-3A1.5 1.5 0 0 1 0 14.5v-3a.5.5 0 0 1 .5-.5zm15 0a.5.5 0 0 1 .5.5v3a1.5 1.5 0 0 1-1.5 1.5h-3a.5.5 0 0 1 0-1h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 1 .5-.5z"/>
@@ -65,7 +64,7 @@
             </a>
         </li>
         <li>
-            <a href="search-order.html" class="nav-link link-body-emphasis d-flex align-items-center">
+            <a href="#" class=" active nav-link link-body-emphasis d-flex align-items-center">
                 <!--        <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#people-circle"></use></svg>-->
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
                     <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
@@ -75,51 +74,35 @@
         </li>
     </ul>
     <hr>
-</nav>
+
+</div>
 <main>
     <section class="d-flex justify-content-between border-bottom p-2">
-        <h2 class="m-0 align-self-center">Manage Customers</h2>
-        <button id="btn-new-customer" class="btn btn-primary" data-bs-toggle="modal"
-                data-bs-target="#newCustomer">New Customer</button>
+        <h2 class="m-0 align-self-center">Search Orders</h2>
+<!--        <button id="btn-new-customer" class="btn btn-primary" data-bs-toggle="modal"-->
+<!--                data-bs-target="#newCustomer">New Customer</button>-->
     </section>
     <section class="p-2">
-        <input id="txt-search" class="form-control text-center" type="text" placeholder="Search Customer">
+        <input id="txt-search" class="form-control text-center" type="text" placeholder="Search Order">
     </section>
     <section class="p-2">
-        <table id="tbl-customers" class="table table-hover table-bordered">
+        <table id="tbl-search-order" class="table table-hover table-bordered">
             <thead class="table-light">
             <tr>
-                <th class="text-center">ID</th>
-                <th>Name</th>
-                <th class="d-none d-xl-table-cell">Address</th>
-                <th class="contact text-center">Contact</th>
-                <th></th>
+                <th class="text-center">Order ID</th>
+                <th>Date/Time</th>
+                <th class="d-none d-xl-table-cell">Customer ID</th>
+                <th class="contact text-center">Customer Name</th>
+                <th>Order Total</th>
             </tr>
             </thead>
             <tbody>
             <tr>
-                <td class="text-center">C001</td>
-                <td>Kasun Sampath</td>
-                <td class="d-none d-xl-table-cell">Grace Peries Road, Panadura</td>
-                <td class="contact text-center">077-1234567</td>
-                <td>
-                    <div class="actions d-flex gap-3 justify-content-center">
-                        <svg id="edit" data-bs-toggle="tooltip" data-bs-title="Edit Customer" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
-                             class="bi bi-pencil-square" viewBox="0 0 16 16">
-                            <path
-                                    d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
-                            <path fill-rule="evenodd"
-                                  d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
-                        </svg>
-                        <svg id="delete" data-bs-toggle="tooltip" data-bs-title="Delete Customer" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
-                             class="bi bi-trash" viewBox="0 0 16 16">
-                            <path
-                                    d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z" />
-                            <path
-                                    d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z" />
-                        </svg>
-                    </div>
-                </td>
+                <td class="text-center">S001</td>
+                <td>1995-08-17 10:57:23</td>
+                <td class="d-none d-xl-table-cell">24</td>
+                <td class="contact text-center">Naduni Thakshila</td>
+                <td>Rs. 4578.25</td>
             </tr>
             </tbody>
             <tfoot>
@@ -130,52 +113,8 @@
         </table>
     </section>
 </main>
-<!-- Modal -->
-<div class="modal fade" id="newCustomer" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-     aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5">Add New Customer</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body text-center">
-                <div class="mb-3">
-                    <label for="txt-id" class="form-label">Customer ID</label>
-                    <input type="text" class="form-control text-center" id="txt-id" placeholder="Generated ID"
-                           disabled>
-                </div>
-                <div class="mb-3">
-                    <label for="txt-name" class="form-label">Customer Name</label>
-                    <input type="text" class="form-control text-center" id="txt-name" placeholder="Eg. Kasun Sampath">
-                    <div class="invalid-feedback">
-                        Name can't be empty
-                    </div>
-                </div>
-                <div class="mb-3">
-                    <label for="txt-contact" class="form-label">Customer Contact</label>
-                    <input type="text" class="form-control text-center" id="txt-contact" placeholder="Eg. 077-1234567">
-                    <div class="invalid-feedback">
-                        Contact can't be empty
-                    </div>
-                </div>
-                <div class="mb-3">
-                    <label for="txt-address" class="form-label">Customer Address</label>
-                    <input type="text" class="form-control text-center" id="txt-address" placeholder="Eg. #501/A, Grace Peries Road, Panadura">
-                    <div class="invalid-feedback">
-                        Address can't be empty
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer d-flex justify-content-between">
-                <div id="loader">
-                    <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
-                </div>
-                <button id="btn-save" type="button" class="btn btn-primary">Save Customer</button>
-            </div>
-        </div>
-    </div>
-</div>
+
+
 
 
 </body>
