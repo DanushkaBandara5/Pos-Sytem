@@ -1,70 +1,67 @@
-// import {Big} from 'big.js';
-import {Big} from '../../node_modules/big.js/big.mjs'
+import Big from "../../node_modules/big.js/big";
 
-export class Cart {
-    customer = null;
-    itemList = [];
+export class Cart{
+    customer;
+    itemList;
     subscriber;
 
     constructor(subscriber) {
-        this.subscriber = subscriber;
-        if (localStorage.getItem("order")){
-            const order = JSON.parse(localStorage.getItem("order"));
-            this.customer = order.customer;
-            this.itemList = order.itemList;
-        }
-        this.#updateOrder();
+        this.subscriber=subscriber;
+        const order =JSON.parse(localStorage.getItem('order'));
+        this.customer=order.customer;
+        this.itemList=order.itemList;
+        this.update();
     }
-
     clear(){
-        this.customer = null;
-        this.itemList = [];
-        this.#updateOrder();
-        this.subscriber(this.getTotal());
+        this.customer=null;
+        this.itemList=[];
+        this.update();
+        this.subscriber(this.getTotal())
     }
-
-    setCustomer(customer){
-        this.customer = customer;
-        this.#updateOrder();
-    }
-
     addItem(item){
         this.itemList.push(item);
-        this.#updateOrder();
-        this.subscriber(this.getTotal());
-    }
-
-    updateItemQty(code, qty){
-        if (!this.containItem(code)) return;
-        this.getItem(code).qty = qty;
-        this.#updateOrder();
-        this.subscriber(this.getTotal());
-    }
-
-    deleteItem(code){
-        const index = this.itemList.indexOf(this.getItem(code));
-        this.itemList.splice(index, 1);
-        this.#updateOrder();
-        this.subscriber(this.getTotal());
-    }
-
-    getItem(code){
-        return this.itemList.find(item => item.code === code);
-    }
-
-    containItem(code){
+        this.update();
+        this.subscriber(this.getTotal())
+    };
+    contentItem(code){
         return !!this.getItem(code);
     }
+    getItem(code){
 
+        return this.itemList.find(ex=>ex.code===code);
+    }
+    delete(code){
+        if(this.contentItem(code)){
+            const index=this.itemList.indexOf(this.getItem(code));
+            this.itemList.splice(index,1);
+            this.update();
+            this.subscriber(this.getTotal())
+        }
+
+
+    }
     getTotal(){
-        let total = new Big(0);
-        this.itemList.forEach(item => {
-            total = total.plus(Big(item.qty).times(Big(item.unitPrice)));
-        })
+        let total =new Big("0");
+        for (const item of this.itemList) {
+            total=total.plus(new Big(item.qty).times(new Big(item.unitPrice)));
+
+        }
         return total;
     }
+    updateItemQty(code,qty){
+        this.getItem(code).qty=qty;
+        this.update();
+        this.subscriber(this.getTotal());
 
-    #updateOrder(){
-        localStorage.setItem("order", JSON.stringify(this));
     }
+    setCustomer(customer){
+        this.customer=customer;
+        this.update();
+
+    }
+    update(){
+        localStorage.setItem('order',JSON.stringify(this));
+
+}
+
 }

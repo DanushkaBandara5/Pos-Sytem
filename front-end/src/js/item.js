@@ -1,3 +1,5 @@
+import {showMessage} from "./toast.js";
+
 const btnNew = $('#btn-new-item');
 const btnSaveItem = $("#btn-save-item");
 const txtCode = $("#txt-code");
@@ -6,7 +8,9 @@ const txtQuantity = $("#txt-quantity");
 const txtPrice =$("#txt-price")
 const tbodyItem = $("#tbl-item tbody");
 const searchItemElm = $("#txt-search");
-const btnClose =$(".btn-close")
+const btnClose =$(".btn-close");
+const REST_API_URL='http://localhost:8080/pos';
+
 
 loadData();
 
@@ -38,37 +42,41 @@ btnSaveItem.on('click', () => {
         const xhr = new XMLHttpRequest();
         xhr.addEventListener('readystatechange', () => {
             if (xhr.readyState == 4) {
+                btnClose.trigger('click');
                 if (xhr.status == 201) {
-                    clear()
-                    //TODO show success message
+                    clear();
+                    showMessage('Item saved successfully','info');
                     loadData();
 
                 } else {
                     const errorObj = JSON.parse(xhr.responseText);
                     clear();
-                    //TODO show Failure message
+                    showMessage(errorObj.message,'warning');
                 }
             }
         })
 
-        xhr.open('POST', `http://localhost:8080/pos/api/v1/items`);
+        xhr.open('POST', `${REST_API_URL}/api/v1/items`);
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.send(JSON.stringify(item));
     } else {
         const xhr = new XMLHttpRequest();
         xhr.addEventListener('readystatechange', () => {
             if (xhr.readyState == 4) {
+                btnClose.trigger('click');
                 if (xhr.status == 204) {
-                    loadData()
                     clear('Save Item')
-                    //TODO show  success messgae
+                    showMessage('Item saved successfully','info');
+                    loadData()
+
                 } else {
-                    clear("Save Item")
-                    //TODO show  fail message
+                    clear("Save Item");
+                    const errorObj=JSON.parse(xhr.responseText);
+                    showMessage(errorObj.message,'info');
                 }
             }
         });
-        xhr.open('PATCH', `http://localhost:8080/pos/api/v1/items/${code}`);
+        xhr.open('PATCH', `${REST_API_URL}/api/v1/items/${code}`);
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.send(JSON.stringify(item))
     }
@@ -124,7 +132,7 @@ function validateMessage(txtElm, message) {
 }
 
 function loadData() {
-    let ajax = $.ajax(`http://127.0.0.1:8080/pos/api/v1/items?q=${searchItemElm.val().trim()}`, 'GET');
+    let ajax = $.ajax(`${REST_API_URL}/api/v1/items?q=${searchItemElm.val().trim()}`, 'GET');
     ajax.done((itemList) => {
         tbodyItem.empty();
 
@@ -171,7 +179,7 @@ function loadData() {
 
 
     ajax.fail(() => {
-        alert("fail to load");
+        showMessage('Fail to fetch Items','warning');
     });
 };
 
@@ -179,7 +187,7 @@ tbodyItem.on('click', 'svg:last-child()', (data) => {
 
     let code = $(data.target).parents('tr').find("td:first-child").text();
 
-    const ajax = $.ajax(`http://127.0.0.1:8080/pos/api/v1/items/${code}`, {
+    const ajax = $.ajax(`${REST_API_URL}/api/v1/items/${code}`, {
         method: 'DELETE',
         crossDomain: true
 
@@ -187,14 +195,15 @@ tbodyItem.on('click', 'svg:last-child()', (data) => {
     ajax.done(() => {
         loadData();
     });
-    ajax.fail(() => {
-    alert("fail to delete")
+    ajax.fail((err) => {
+        showMessage(err.responseJSON.message,'warning');
+
     })
 });
 
 tbodyItem.on('click', 'svg:first-child()', (data) => {
 
-    code = $(data.target).parents('tr').find("td:first-child").text();
+    const code= $(data.target).parents('tr').find("td:first-child").text();
     let description = $(data.target).parents('tr').find("td:nth-child(2)").text();
     let quantity = $(data.target).parents('tr').find("td:nth-child(3)").text();
     let unitPrice = $(data.target).parents('tr').find("td:nth-child(4)").text();

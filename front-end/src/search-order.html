@@ -2,12 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../node_modules/animate.css/animate.min.css">
     <link rel="stylesheet" href="sass/styles.scss">
     <link rel="stylesheet" href="sass/search-order.scss">
     <script defer src="../node_modules/jquery/dist/jquery.min.js"></script>
-    <script defer src="./js/search-order.js"></script>
+    <script type="module" defer src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script type="module" defer src="js/search-order.js"></script>
+    <title>Search Order</title>
 
 </head>
 
@@ -97,13 +100,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <td class="text-center">S001</td>
-                <td>1995-08-17 10:57:23</td>
-                <td class="d-none d-xl-table-cell">24</td>
-                <td class="contact text-center">Naduni Thakshila</td>
-                <td>Rs. 4578.25</td>
-            </tr>
+
             </tbody>
             <tfoot>
             <tr>
@@ -113,6 +110,15 @@
         </table>
     </section>
 </main>
+<div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+        <strong class="me-auto">Bootstrap</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body">
+
+    </div>
+</div>
 
 
 

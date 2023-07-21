@@ -1,4 +1,5 @@
 // import {formatNumber, formatPrice} from "./order";
+import {showMessage} from "./toast.js";
 import {Cart} from './cart.js'
 import {DateTimeFormatter, LocalDateTime} from "@js-joda/core";
 import Big from "big.js";
@@ -19,7 +20,7 @@ const btnPlaceOrder=$('#btn-place-order');
 
 let customer=null;
 let item =null;
-let cart = new Cart((total)=> netTotalElm.text(total));
+let cart = new Cart((total)=> netTotalElm.text(formatPrice(total)));
 loadData();
 setInterval(setDateTime,1000);
 
@@ -66,14 +67,14 @@ formOrderElm.on('submit',(eventData)=>{
       }
       item.qty = +txtQty.val();
 
-      if (cart.containItem(item.code)) {
-            const codeElm =Array.from(tbodyElm.find("tr td:first-child()")).find(codeElm=>$(codeElm).text()===item.code);
+      if (cart.contentItem(item.code)) {
+            const codeElm =Array.from(tbodyElm.find("tr td:first-child .code")).find(codeElm=>$(codeElm).text()===item.code);
             const qtyElm =$(codeElm).parents('tr').find('td:nth-child(2)');
             const priceElm = $(codeElm).parents("tr").find("td:nth-child(4)");
 
             cart.updateItemQty(item.code, cart.getItem(item.code).qty + item.qty);
-            qtyElm.text(cart.getItem(item.code).qty);
-            priceElm.text((Big(cart.getItem(item.code).qty).times(Big(item.unitPrice))));
+            $(qtyElm).text(cart.getItem(item.code).qty);
+            $(priceElm).text((Big(cart.getItem(item.code).qty).times(Big(item.unitPrice))));
       } else {
             addItemToTable(item);
             cart.addItem(item);
@@ -89,8 +90,9 @@ formOrderElm.on('submit',(eventData)=>{
 
 tbodyElm.on('click','tr td:first-child  svg',(eventData)=>{
       const code =$(eventData.target).parents('tr').find('td:first-child .code').text();
-      cart.deleteItem(code);
+      cart.delete(code);
       $(eventData.target).parents('tr').remove();
+      if(cart.itemList==0) tFootElm.show();
 
 });
 
@@ -110,10 +112,11 @@ btnPlaceOrder.on('click',()=>{
                         $("#btn-clear-customer").trigger('click');
                         txtCode.trigger('input');
                         tFootElm.show();
-
-                        //todo show this item was saved successfully
+                        showMessage('Order placed successfully','info');
                   }else{
-                        //TODO error message
+                        const errorObj =JSON.parse(xhr.responseText);
+                        showMessage(errorObj.message,'warning');
+
                   }
             }
       });
@@ -151,7 +154,7 @@ function findItems(){
             item =data;
             description.text(item.description);
             price.text(item.unitPrice);
-            if (cart.containItem(item.code)) {
+            if (cart.contentItem(item.code)) {
             item.qty -= cart.getItem(code).qty;
         }
             stock.text(item?`Stock In ${item.qty}`:'Out-of-Stock');
@@ -194,10 +197,10 @@ function addItemToTable(item) {
                         ${item.qty}
                     </td>
                     <td>
-                        ${item.unitPrice}
+                        ${formatPrice(item.unitPrice)}
                     </td>
                     <td>
-                        ${Big(item.unitPrice).times(Big(item.qty))}
+                        ${formatPrice(Big(item.unitPrice).times(Big(item.qty)))}
                     </td>
                 </tr>`);
       tbodyElm.append(trElm);
@@ -215,22 +218,22 @@ function loadData(){
 }
 
 
-// export function formatPrice(price) {
-//       return new Intl.NumberFormat('en-LK', {
-//             style: 'currency',
-//             currency: 'LKR',
-//             minimumFractionDigits: 2,
-//             maximumFractionDigits: 2
-//       }).format(price);
-// }
-//
-// export function formatNumber(number) {
-//       return new Intl.NumberFormat('en-LK', {
-//             style: 'decimal',
-//             minimumFractionDigits: 2,
-//             maximumFractionDigits: 2
-//       }).format(number);
-// }
+export function formatPrice(price) {
+      return new Intl.NumberFormat('en-LK', {
+            style: 'currency',
+            currency: 'LKR',
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+      }).format(price);
+}
+
+export function formatNumber(number) {
+      return new Intl.NumberFormat('en-LK', {
+            style: 'decimal',
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+      }).format(number);
+}
 
 function setDateTime() {
       const now = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));

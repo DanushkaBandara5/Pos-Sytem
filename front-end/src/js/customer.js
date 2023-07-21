@@ -1,3 +1,5 @@
+import {showMessage} from "./toast.js";
+
 const btnNew = $('#btn-new-customer');
 const btnSave = $("#btn-save");
 const txtName = $("#txt-name");
@@ -5,6 +7,8 @@ const txtContact = $("#txt-contact");
 const txtAddress = $("#txt-address");
 const tbodyElm = $("#tbl-customers tbody");
 const searchElm = $("#txt-search");
+const btnClose = $(".btn-close");
+const REST_API_URL='http://localhost:8080/pos';
 let id;
 loadData();
 
@@ -29,28 +33,27 @@ btnSave.on('click', () => {
     let customer = {
         name, contact, address
     };
-    console.log(btnSave.text())
     if (btnSave.text() === 'Save Customer') {
 
 
         const xhr = new XMLHttpRequest();
         xhr.addEventListener('readystatechange', () => {
             if (xhr.readyState == 4) {
+                btnClose.trigger('click');
                 if (xhr.status == 201) {
                     clear()
-                    //TODO show success message
-                    customers = JSON.parse(xhr.responseText);
+                    showMessage('Customers saved successfully', 'info');
                     loadData();
 
                 } else {
                     const errorObj = JSON.parse(xhr.responseText);
                     clear();
-                    //TODO show Failure message
+                    showMessage(errorObj.message, 'warning');
                 }
             }
         })
 
-        xhr.open('POST', `Http://localhost:8080/pos/api/v1/customers`);
+        xhr.open('POST', `${REST_API_URL}/api/v1/customers`);
         xhr.setRequestHeader('Content-Type', 'application/json');
         console.log(customer)
         xhr.send(JSON.stringify(customer));
@@ -59,17 +62,20 @@ btnSave.on('click', () => {
         const xhr = new XMLHttpRequest();
         xhr.addEventListener('readystatechange', () => {
             if (xhr.readyState == 4) {
+                btnClose.trigger('click');
                 if (xhr.status == 204) {
                     loadData()
-                    clear('Save Customer')
+                    clear('Save Customer');
+                    showMessage('Customers updated successfully', 'info');
                     //TODO show  success messgae
                 } else {
                     clear("Save Customers")
-                    //TODO show  fail message
+                    const errorObj = JSON.stringify(xhr.readyState)
+                    showMessage(errorObj.message, 'warning');
                 }
             }
         });
-        xhr.open('PATCH', `http://localhost:8080/pos/api/v1/customers/${id}`);
+        xhr.open('PATCH', `${REST_API_URL}/api/v1/customers/${id}`);
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.send(JSON.stringify(customer))
     }
@@ -118,7 +124,7 @@ function validateMessage(txtElm, message) {
 }
 
 function loadData() {
-    let ajax = $.ajax(`http://127.0.0.1:8080/pos/api/v1/customers?q=${searchElm.val().trim()}`, 'GET');
+    let ajax = $.ajax(`${REST_API_URL}/api/v1/customers?q=${searchElm.val().trim()}`, 'GET');
     ajax.done((custList) => {
         tbodyElm.empty();
 
@@ -164,23 +170,24 @@ function loadData() {
 
 
     ajax.fail(() => {
-        alert("fail to load");
+        showMessage('Fail to fetch Customers','warning');
     });
 };
 
 tbodyElm.on('click', 'svg:last-child()', (data) => {
 
-    let id = $(data.target).parents('tr').find("td:first-child").text();
+    let id = +$(data.target).parents('tr').find("td:first-child").text().replaceAll('C', '');
 
-    const ajax = $.ajax(`http://127.0.0.1:8080/pos/api/v1/customers/${id}`, {
-        method: 'DELETE',
-        crossDomain: true
+    const ajax = $.ajax(`${REST_API_URL}/api/v1/customers/${id}`, {
+        method: 'DELETE', crossDomain: true
 
     });
     ajax.done(() => {
         loadData();
+        showMessage('Customers deleted successfully', 'info');
     });
-    ajax.fail(() => {
+    ajax.fail((err) => {
+        showMessage(err.responseJSON.message, 'warning');
 
     })
 });
@@ -207,17 +214,19 @@ function clear(text) {
 }
 
 function formatID(value) {
-    if(value<10){
-        return "C00"+value;
+    if (value < 10) {
+        return "C00" + value;
 
-    }else if (value<100){
-        return "C0"+value;
-    }
-    else if(value<1000){
-        return "C"+value;
+    } else if (value < 100) {
+        return "C0" + value;
+    } else if (value < 1000) {
+        return "C" + value;
     }
 
 }
+
+
+
 
 
 

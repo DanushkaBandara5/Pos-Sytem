@@ -1,4 +1,5 @@
-
+import {formatPrice} from "./order.js";
+import {showMessage} from "./toast.js";
 
 const tbodyElm =$("#tbl-search-order tbody");
 const tfootElm =$("#tbl-search-order tfoot");
@@ -26,15 +27,16 @@ function loadData(){
                 orderList.forEach(orderDetails=>{
                     const trElm =$('<tr></tr>')
                     trElm.append(` <td class="text-center">${orderDetails.orderId}</td>
-                                    <td>${formateDate(orderDetails.orderDate)}</td>
+                                    <td>${formatDate(orderDetails.orderDate)}</td>
                                     <td class="d-none d-xl-table-cell">${orderDetails.customerId??'Walk-in-Customer'}</td>
                                     <td class="contact text-center">${orderDetails.customerName??'Walk-in-Customer'}</td>
-                                    <td>${orderDetails.orderTotal}</td>`);
+                                    <td>${formatPrice(orderDetails.orderTotal)}</td>`);
                     tbodyElm.append(trElm);
 
                 });
 
             }else{
+                showMessage('Fail to fetch Orders','warning');
                 tbodyElm.empty();
                 tfootElm.show();
 
@@ -44,7 +46,7 @@ function loadData(){
     xhr.open('GET',`${REST_API_URL}/api/v1/orders?q=${searchElm.val().trim()}`);
     xhr.send();
 }
-function formateDate(dateTime){
+function formatDate(dateTime){
     let result='';
     for (let i = 0; i < 3; i++) {
         result+=formatNumber(dateTime[i])+"-";
