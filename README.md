@@ -24,14 +24,16 @@
 
 ## Technologies Used
 - Spring Framwork version-5.3.27
+- Junit
+- Hibernate validator
+- Hibernate ORM
 - Maven version-3.8.7
 - HTLM 5
 - SCSS version 1.63.6
 - Bootstrap version 5.3.0
 - Jquery version 3.7.0
 - MySQL version-8.0.33
-- Hibernate validator
-- Hibernate ORM
+
 
 
 
