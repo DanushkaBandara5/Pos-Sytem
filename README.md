@@ -23,7 +23,7 @@
 
 
 ## Technologies Used
-- Spring Boot
+- Spring Framwork version-5.3.27
 - Maven version-3.8.7
 - HTLM 5
 - SCSS version 1.63.6
@@ -37,10 +37,10 @@
 
 
 ## Features
-- Register customer,delete registred customer and update thier details
-- Register item, delete item  and update item 
-- place a order with respect to the registered customer or unregisterd customer
-- update stock for each order and maintained records for every order
+- Customer registration,delete registred customer and update the details of registered customer
+- Add a Item to the stock, delete item from the and update a item 
+- Place a order with respect to the registered customer or unregisterd customer
+- Update stock for each order and maintained records for every order
 
 
 
