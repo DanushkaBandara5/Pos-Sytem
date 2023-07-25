@@ -1,4 +1,4 @@
-# Smart POS Syetem for Super Market V-1.0.0
+# Smart POS System for Super Market V-1.0.0
 > This Application is designed for super market to maintain Item records,Customer details and issue goods and update stock according to the transactions.
 >Layered achitechture,client server achitecture, SOLID design principles and few design patterns have been applied to this project.
 >This project is conducted for experimental purpose
