@@ -38,9 +38,9 @@
 
 ## Features
 - Customer registration,delete registred customer and update the details of registered customer
-- Add a Item to the stock, delete item from the and update a item 
+- Add a Item to the stock, delete item and update a item 
 - Place a order with respect to the registered customer or unregisterd customer
-- Update stock for each order and maintained records for every order
+- Automatically update stock for each order and maintained records for every order
 
 
 
