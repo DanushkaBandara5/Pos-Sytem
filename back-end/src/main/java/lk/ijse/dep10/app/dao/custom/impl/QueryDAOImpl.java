@@ -3,9 +3,10 @@ package lk.ijse.dep10.app.dao.custom.impl;
 
 
 import lk.ijse.dep10.app.dao.custom.QueryDAO;
-import lk.ijse.dep10.app.dao.util.JdbcTemplate;
 import lk.ijse.dep10.app.dto.OrderDTO2;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import static lk.ijse.dep10.app.dao.util.Mappers.ORDER_DTO_2_ROW_MAPPER;
 
@@ -13,16 +14,15 @@ import java.sql.Connection;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Component
+@Repository
 public class QueryDAOImpl implements QueryDAO {
 
-    private JdbcTemplate jdbcTemplate;
+    private final JdbcTemplate jdbcTemplate;
 
-
-    @Override
-    public void setConnection(Connection connection) {
-        jdbcTemplate  = new JdbcTemplate(connection);
+    public QueryDAOImpl(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
     }
+
 
     @Override
     public List<OrderDTO2> findOrdersByQuery(String query) throws Exception {

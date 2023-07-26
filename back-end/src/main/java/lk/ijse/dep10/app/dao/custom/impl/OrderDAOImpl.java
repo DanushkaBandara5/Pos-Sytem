@@ -2,11 +2,12 @@ package lk.ijse.dep10.app.dao.custom.impl;
 
 
 import lk.ijse.dep10.app.dao.custom.OrderDAO;
-import lk.ijse.dep10.app.dao.util.GeneratedKeyHolder;
-import lk.ijse.dep10.app.dao.util.JdbcTemplate;
-import lk.ijse.dep10.app.dao.util.KeyHolder;
 import lk.ijse.dep10.app.entity.Order;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import static lk.ijse.dep10.app.dao.util.Mappers.ORDER_ROW_MAPPER;
 
@@ -15,17 +16,15 @@ import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.util.List;
 import java.util.Optional;
-@Component
+@Repository
 
 public class OrderDAOImpl  implements OrderDAO {
 
-    private JdbcTemplate jdbcTemplate;
-    @Override
-    public void setConnection(Connection connection) {
-        this.jdbcTemplate=new JdbcTemplate(connection);
+    private final JdbcTemplate jdbcTemplate;
 
+    public OrderDAOImpl(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
     }
-
 
     @Override
     public long count() throws Exception {

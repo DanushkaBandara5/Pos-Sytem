@@ -2,12 +2,11 @@ package lk.ijse.dep10.app.business.custom;
 
 
 
-import lk.ijse.dep10.app.business.SuperBO;
 import lk.ijse.dep10.app.dto.CustomerDTO;
 
 import java.util.List;
 
-public interface CustomerBO extends SuperBO {
+public interface CustomerBO {
 
     CustomerDTO saveCustomer(CustomerDTO customerDTO) throws Exception;
 

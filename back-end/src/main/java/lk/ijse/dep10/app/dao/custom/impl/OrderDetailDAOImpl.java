@@ -2,10 +2,11 @@ package lk.ijse.dep10.app.dao.custom.impl;
 
 
 import lk.ijse.dep10.app.dao.custom.OrderDetailDAO;
-import lk.ijse.dep10.app.dao.util.JdbcTemplate;
 import lk.ijse.dep10.app.entity.OrderDetail;
 import lk.ijse.dep10.app.entity.OrderDetailPK;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import static lk.ijse.dep10.app.dao.util.Mappers.ORDER_DETAIL_ROW_MAPPER;
 
@@ -14,14 +15,13 @@ import java.util.List;
 import java.util.Optional;
 
 
-@Component
+@Repository
 public class OrderDetailDAOImpl implements OrderDetailDAO {
 
-    private JdbcTemplate jdbcTemplate;
-    @Override
-    public void setConnection(Connection connection) {
-        this.jdbcTemplate=new JdbcTemplate(connection);
+    private final JdbcTemplate jdbcTemplate;
 
+    public OrderDetailDAOImpl(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
     }
 
     @Override

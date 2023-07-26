@@ -1,12 +1,11 @@
 package lk.ijse.dep10.app.business.custom;
 
 
-import lk.ijse.dep10.app.business.SuperBO;
 import lk.ijse.dep10.app.dto.ItemDTO;
 
 import java.util.List;
 
-public interface ItemBO extends SuperBO {
+public interface ItemBO {
 
     void saveItem(ItemDTO itemDTO) throws Exception;
 

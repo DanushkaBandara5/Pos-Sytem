@@ -9,12 +9,15 @@ import lk.ijse.dep10.app.dao.custom.OrderDetailDAO;
 import lk.ijse.dep10.app.dto.ItemDTO;
 import lk.ijse.dep10.app.business.util.Transformer;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.util.List;
 import java.util.stream.Collectors;
-@Component
+@Service
+@Transactional
 public class ItemBOImpl implements ItemBO {
 
     private final DataSource dataSource;
@@ -31,33 +34,27 @@ public class ItemBOImpl implements ItemBO {
 
     @Override
     public void saveItem(ItemDTO itemDTO) throws Exception {
-        try (Connection connection = dataSource.getConnection()) {
-            itemDAO.setConnection(connection);
+
 
             if (itemDAO.existsById(itemDTO.getCode())) throw new BusinessException(BusinessExceptionType.DUPLICATE_RECORD,
                     "Save failed: Item code: " + itemDTO.getCode() + " already exists");
 
             itemDAO.save(transformer.toItemEntity(itemDTO));
-        }
+
     }
 
     @Override
     public void updateItem(ItemDTO itemDTO) throws Exception {
-        try (Connection connection = dataSource.getConnection()) {
-            itemDAO.setConnection(connection);
 
             if (!itemDAO.existsById(itemDTO.getCode()))
                 throw new BusinessException(BusinessExceptionType.RECORD_NOT_FOUND,
                         "Update failed: Item code: " + itemDTO.getCode() + " does not exist");
             itemDAO.update(transformer.toItemEntity(itemDTO));
-        }
+
     }
 
     @Override
     public void deleteItemByCode(String itemCode) throws Exception {
-        try (Connection connection = dataSource.getConnection()) {
-            itemDAO.setConnection(connection);
-            orderDetailDAO.setConnection(connection);
 
             if (orderDetailDAO.existsOrderDetailByItemCode(itemCode)) throw new BusinessException(BusinessExceptionType.INTEGRITY_VIOLATION,
                     "Delete failed: Item code: " + itemCode + " already associated with some orders");
@@ -66,25 +63,23 @@ public class ItemBOImpl implements ItemBO {
                 throw new BusinessException(BusinessExceptionType.RECORD_NOT_FOUND,
                         "Delete failed: Item code: " + itemCode + " does not exist");
             itemDAO.deleteById(itemCode);
-        }
+
     }
 
     @Override
     public ItemDTO findItemByCode(String itemCode) throws Exception {
-        try (Connection connection = dataSource.getConnection()) {
-            itemDAO.setConnection(connection);
+
 
             return itemDAO.findById(itemCode).map(transformer::fromItemEntity).orElseThrow(()-> new BusinessException(BusinessExceptionType.RECORD_NOT_FOUND,
                     "No item record found for the code: " + itemCode));
-        }
+
     }
 
     @Override
     public List<ItemDTO> findItems(String query) throws Exception {
-        try (Connection connection = dataSource.getConnection()) {
-            itemDAO.setConnection(connection);
+
 
             return itemDAO.findItems(query).stream().map(transformer::fromItemEntity).collect(Collectors.toList());
         }
-    }
+
 }

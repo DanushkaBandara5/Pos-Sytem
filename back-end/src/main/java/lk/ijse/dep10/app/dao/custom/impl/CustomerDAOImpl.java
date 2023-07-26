@@ -1,11 +1,12 @@
 package lk.ijse.dep10.app.dao.custom.impl;
 
 import lk.ijse.dep10.app.dao.custom.CustomerDAO;
-import lk.ijse.dep10.app.dao.util.GeneratedKeyHolder;
-import lk.ijse.dep10.app.dao.util.JdbcTemplate;
-import lk.ijse.dep10.app.dao.util.KeyHolder;
 import lk.ijse.dep10.app.entity.Customer;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import static lk.ijse.dep10.app.dao.util.Mappers.CUSTOMER_ROW_MAPPER;
 
@@ -14,13 +15,12 @@ import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.util.List;
 import java.util.Optional;
-@Component
+@Repository
 public class CustomerDAOImpl implements CustomerDAO {
-    private JdbcTemplate jdbcTemplate;
+    private final JdbcTemplate jdbcTemplate;
 
-    @Override
-    public void setConnection(Connection connection) {
-        jdbcTemplate =new JdbcTemplate(connection);
+    public CustomerDAOImpl(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
     }
 
     @Override

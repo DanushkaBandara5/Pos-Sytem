@@ -2,6 +2,7 @@ package lk.ijse.dep10.app.dao.util;
 
 import lk.ijse.dep10.app.dto.OrderDTO2;
 import lk.ijse.dep10.app.entity.*;
+import org.springframework.jdbc.core.RowMapper;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;

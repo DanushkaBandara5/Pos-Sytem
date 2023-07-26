@@ -14,12 +14,15 @@ import lk.ijse.dep10.app.entity.OrderCustomer;
 import lk.ijse.dep10.app.entity.OrderDetail;
 import lk.ijse.dep10.app.business.util.Transformer;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.Timestamp;
 import java.util.List;
-@Component
+@Service
+@Transactional
 public class OrderBOImpl implements OrderBO {
 
     private final DataSource dataSource;
@@ -47,11 +50,7 @@ public class OrderBOImpl implements OrderBO {
     @Override
     public Integer placeOrder(OrderDTO orderDTO) throws Exception {
         try (Connection connection = dataSource.getConnection()) {
-            orderDAO.setConnection(connection);
-            customerDAO.setConnection(connection);
-            itemDAO.setConnection(connection);
-            orderDetailDAO.setConnection(connection);
-            orderCustomerDAO.setConnection(connection);
+
 
             /* Let's start transaction */
             connection.setAutoCommit(false);
@@ -127,9 +126,8 @@ public class OrderBOImpl implements OrderBO {
 
     @Override
     public List<OrderDTO2> searchOrders(String query) throws Exception {
-        try (Connection connection = dataSource.getConnection()) {
-            queryDAO.setConnection(connection);
+
             return queryDAO.findOrdersByQuery(query);
-        }
+
     }
 }
