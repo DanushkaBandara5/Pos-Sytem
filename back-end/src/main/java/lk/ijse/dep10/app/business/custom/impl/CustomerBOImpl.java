@@ -23,13 +23,11 @@ import java.util.stream.Collectors;
 public class CustomerBOImpl implements CustomerBO {
 
     private final Transformer transformer;
-    private final DataSource dataSource;
     private final CustomerDAO customerDAO ;
     private final OrderCustomerDAO orderCustomerDAO;
 
-    public CustomerBOImpl(Transformer transformer, DataSource dataSource, CustomerDAO customerDAO, OrderCustomerDAO orderCustomerDAO) {
+    public CustomerBOImpl(Transformer transformer, CustomerDAO customerDAO, OrderCustomerDAO orderCustomerDAO) {
         this.transformer = transformer;
-        this.dataSource = dataSource;
         this.customerDAO = customerDAO;
         this.orderCustomerDAO = orderCustomerDAO;
     }

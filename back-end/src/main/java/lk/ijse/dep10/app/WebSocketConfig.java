@@ -23,8 +23,4 @@ public class WebSocketConfig implements WebSocketConfigurer {
         return new CustomerWSHandler();
     }
 
-    @Bean
-    public ObjectMapper objectMapper() {
-        return new ObjectMapper();
-    }
 }

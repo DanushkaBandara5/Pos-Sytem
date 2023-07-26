@@ -38,7 +38,7 @@ public class GlobalExceptionHandler {
         }
         errorAttributes.put("message", exp.getMessage());
         return new ResponseEntity<>(errorAttributes,
-                HttpStatus.valueOf((Integer) errorAttributes.get("status")));
+                HttpStatus.valueOf( (Integer) errorAttributes.get("status")));
     }
 
     @ExceptionHandler({

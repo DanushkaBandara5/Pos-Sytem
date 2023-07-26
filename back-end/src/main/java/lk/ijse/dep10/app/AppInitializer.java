@@ -1,20 +1,11 @@
 package lk.ijse.dep10.app;
 
-import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-public class AppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
-    @Override
-    protected Class<?>[] getRootConfigClasses() {
-        return new Class[]{WebRootConfig.class};
-    }
-
-    @Override
-    protected Class<?>[] getServletConfigClasses() {
-        return new Class[]{WebAppConfig.class};
-    }
-
-    @Override
-    protected String[] getServletMappings() {
-        return new String[]{"/"};
+@SpringBootApplication
+public class AppInitializer {
+    public static void main(String[] args) {
+        SpringApplication.run(AppInitializer.class,args);
     }
 }

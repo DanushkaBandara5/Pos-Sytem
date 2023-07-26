@@ -20,13 +20,13 @@ import java.util.stream.Collectors;
 @Transactional
 public class ItemBOImpl implements ItemBO {
 
-    private final DataSource dataSource;
+
     private final ItemDAO itemDAO ;
     private final OrderDetailDAO orderDetailDAO;
     private final Transformer transformer;
 
-    public ItemBOImpl(DataSource dataSource, ItemDAO itemDAO, OrderDetailDAO orderDetailDAO, Transformer transformer) {
-        this.dataSource = dataSource;
+    public ItemBOImpl(ItemDAO itemDAO, OrderDetailDAO orderDetailDAO, Transformer transformer) {
+
         this.itemDAO = itemDAO;
         this.orderDetailDAO = orderDetailDAO;
         this.transformer = transformer;
