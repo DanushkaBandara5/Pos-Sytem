@@ -20,4 +20,5 @@ public class Customer implements SuperEntity {
         this.address = address;
         this.contact = contact;
     }
+
 }

@@ -5,13 +5,15 @@ package lk.ijse.dep10.app.dao.custom.impl;
 import lk.ijse.dep10.app.dao.custom.QueryDAO;
 import lk.ijse.dep10.app.dao.util.JdbcTemplate;
 import lk.ijse.dep10.app.dto.OrderDTO2;
+import org.springframework.stereotype.Component;
+
 import static lk.ijse.dep10.app.dao.util.Mappers.ORDER_DTO_2_ROW_MAPPER;
 
 import java.sql.Connection;
 import java.util.List;
 import java.util.stream.Collectors;
 
-
+@Component
 public class QueryDAOImpl implements QueryDAO {
 
     private JdbcTemplate jdbcTemplate;

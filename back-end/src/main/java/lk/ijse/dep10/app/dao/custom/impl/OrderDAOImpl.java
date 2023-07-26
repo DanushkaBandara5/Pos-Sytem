@@ -6,6 +6,8 @@ import lk.ijse.dep10.app.dao.util.GeneratedKeyHolder;
 import lk.ijse.dep10.app.dao.util.JdbcTemplate;
 import lk.ijse.dep10.app.dao.util.KeyHolder;
 import lk.ijse.dep10.app.entity.Order;
+import org.springframework.stereotype.Component;
+
 import static lk.ijse.dep10.app.dao.util.Mappers.ORDER_ROW_MAPPER;
 
 import java.sql.Connection;
@@ -13,7 +15,7 @@ import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.util.List;
 import java.util.Optional;
-
+@Component
 
 public class OrderDAOImpl  implements OrderDAO {
 

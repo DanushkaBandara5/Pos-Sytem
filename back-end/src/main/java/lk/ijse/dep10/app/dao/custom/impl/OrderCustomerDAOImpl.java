@@ -5,12 +5,13 @@ import  static lk.ijse.dep10.app.dao.util.Mappers.ORDER_CUSTOMER_ROW_MAPPER;
 import lk.ijse.dep10.app.dao.custom.OrderCustomerDAO;
 import lk.ijse.dep10.app.dao.util.JdbcTemplate;
 import lk.ijse.dep10.app.entity.OrderCustomer;
+import org.springframework.stereotype.Component;
 
 import java.sql.Connection;
 import java.util.List;
 import java.util.Optional;
 
-
+@Component
 public class OrderCustomerDAOImpl implements OrderCustomerDAO {
     private JdbcTemplate jdbcTemplate;
     @Override

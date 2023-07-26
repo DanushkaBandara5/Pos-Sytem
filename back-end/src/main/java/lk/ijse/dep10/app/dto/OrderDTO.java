@@ -24,4 +24,6 @@ public class OrderDTO {
     private LocalDateTime dateTime;
     @NotEmpty(message = "Item list can't be null or empty")
     private List<@Valid ItemDTO> itemList = new ArrayList<>();
+
+
 }

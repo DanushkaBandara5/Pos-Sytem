@@ -5,6 +5,8 @@ import lk.ijse.dep10.app.dao.custom.OrderDetailDAO;
 import lk.ijse.dep10.app.dao.util.JdbcTemplate;
 import lk.ijse.dep10.app.entity.OrderDetail;
 import lk.ijse.dep10.app.entity.OrderDetailPK;
+import org.springframework.stereotype.Component;
+
 import static lk.ijse.dep10.app.dao.util.Mappers.ORDER_DETAIL_ROW_MAPPER;
 
 import java.sql.Connection;
@@ -12,7 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 
-
+@Component
 public class OrderDetailDAOImpl implements OrderDetailDAO {
 
     private JdbcTemplate jdbcTemplate;

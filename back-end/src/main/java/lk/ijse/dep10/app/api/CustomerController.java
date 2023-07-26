@@ -1,7 +1,5 @@
 package lk.ijse.dep10.app.api;
 
-import lk.ijse.dep10.app.business.BOFactory;
-import lk.ijse.dep10.app.business.BOType;
 import lk.ijse.dep10.app.business.custom.CustomerBO;
 import lk.ijse.dep10.app.dto.CustomerDTO;
 import org.apache.commons.dbcp2.BasicDataSource;
@@ -17,14 +15,16 @@ import java.util.List;
 @CrossOrigin
 
 public class CustomerController {
+    private final CustomerBO customerBO;
 
-    @Autowired
-    private BasicDataSource pool;
+    public CustomerController(CustomerBO customerBO) {
+        this.customerBO = customerBO;
+    }
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     public CustomerDTO saveCustomer(@RequestBody @Valid CustomerDTO customer) throws Exception {
-        CustomerBO customerBO = BOFactory.getInstance().getBO(BOType.CUSTOMER, pool);
+
         return customerBO.saveCustomer(customer);
     }
 
@@ -33,7 +33,7 @@ public class CustomerController {
     @PatchMapping("/{customerId}")
     public void updateCustomer(@PathVariable("customerId") Integer customerId,
                                @RequestBody @Valid CustomerDTO customer) throws Exception {
-        CustomerBO customerBO = BOFactory.getInstance().getBO(BOType.CUSTOMER, pool);
+
         customer.setId(customerId);
         customerBO.updateCustomer(customer);
     }
@@ -42,7 +42,7 @@ public class CustomerController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{customerId}")
     public void deleteCustomer(@PathVariable("customerId") Integer customerId) throws Exception {
-        CustomerBO customerBO = BOFactory.getInstance().getBO(BOType.CUSTOMER, pool);
+
         customerBO.deleteCustomerById(customerId);
     }
 
@@ -50,7 +50,9 @@ public class CustomerController {
     @GetMapping
     public List<CustomerDTO> getCustomers(@RequestParam(value = "q", required = false) String query) throws Exception {
         if (query == null) query = "";
-        CustomerBO customerBO = BOFactory.getInstance().getBO(BOType.CUSTOMER, pool);
+        System.out.println("arrieved");
+
         return customerBO.findCustomers(query);
     }
 }
+
